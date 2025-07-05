@@ -22,15 +22,15 @@ namespace TestTask.Infrastructure.Jobs.Configuration
             configuration
                 .Bind(JobsCron, this);
 
-            if (string.IsNullOrWhiteSpace(this.LoadMeteoritesCron))
+            if (string.IsNullOrWhiteSpace(this.ActualizationMeteoritesCron))
             {
                 throw new InvalidOperationException($"Not find value in {JobsCron} section.");
             }
         }
 
         /// <summary>
-        /// Gets LoadMeteorites Cron.
+        /// Gets ActualizationMeteorites Cron.
         /// </summary>
-        public string LoadMeteoritesCron { get; init; }
+        public string ActualizationMeteoritesCron { get; init; }
     }
 }

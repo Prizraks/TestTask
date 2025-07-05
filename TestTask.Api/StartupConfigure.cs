@@ -5,7 +5,9 @@
 namespace TestTask.Api
 {
     using Coravel;
+    using Coravel.Scheduling.Schedule.Interfaces;
 
+    using TestTask.Api.Middlewares;
     using TestTask.Infrastructure.Jobs.Configuration;
 
     /// <summary>
@@ -23,6 +25,15 @@ namespace TestTask.Api
             builder.ApplicationServices
                 .UseScheduler(scheduler => JobsConfiguration.ConfigureJobs(scheduler, new JobsCronOptions(configuration)))
                 .LogScheduledTaskProgress();
+        }
+
+        /// <summary>
+        /// Register RequestCancellationMiddleware.
+        /// </summary>
+        /// <param name="builder">Builder.</param>
+        public static void UseRequestCancellationLogging(this IApplicationBuilder builder)
+        {
+            builder.UseMiddleware<RequestCancellationMiddleware>();
         }
     }
 }

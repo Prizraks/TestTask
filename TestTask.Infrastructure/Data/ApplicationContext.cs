@@ -5,9 +5,9 @@
 namespace TestTask.Infrastructure.Data
 {
     using System.Reflection;
+    using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
 
     using TestTask.Domain.Meteorite;
 
@@ -16,9 +16,7 @@ namespace TestTask.Infrastructure.Data
     /// </summary>
     internal class ApplicationContext : DbContext, IApplicationContext
     {
-        private const string ConnStringConfigName = "SqlLiteConnection";
-
-        private readonly IConfiguration configuration;
+        private const string ConnStringConfigName = "name=ConnectionStrings:SqlLiteConnection";
 
         /// <inheritdoc />
         public DbSet<Meteorite> Meteorites { get; set; }
@@ -27,20 +25,24 @@ namespace TestTask.Infrastructure.Data
         /// Initializes a new instance of the <see cref="ApplicationContext"/> class.
         /// </summary>
         /// <param name="options">Options.</param>
-        /// <param name="configuration">Configuration.</param>
-        public ApplicationContext(
-            DbContextOptions<ApplicationContext> options,
-            IConfiguration configuration)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
+#if DEBUG
             this.Database.EnsureCreated();
-            this.configuration = configuration;
+#endif
+        }
+
+        /// <inheritdoc/>
+        public async Task SaveAsync(CancellationToken token)
+        {
+            await this.SaveChangesAsync(token);
         }
 
         /// <inheritdoc/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(this.configuration.GetConnectionString(ConnStringConfigName));
+            optionsBuilder.UseSqlite(connectionString: ConnStringConfigName);
 
 #if DEBUG
             optionsBuilder

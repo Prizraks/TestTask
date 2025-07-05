@@ -6,19 +6,21 @@ namespace TestTask.Application
 {
     using Microsoft.Extensions.DependencyInjection;
 
+    using TestTask.Application.Meteorite.Services;
+    using TestTask.Application.Meteorite.Services.Contracts;
+
     /// <summary>
     /// Application configure.
     /// </summary>
     public static class StartupConfigure
     {
         /// <summary>
-        /// Add infrastructure services.
+        /// Add application services.
         /// </summary>
         /// <param name="services">Service collection.</param>
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddDatabase();
-            services.AddJobs();
+            services.AddScoped<IMeteoriteService, MeteoriteService>();
         }
     }
 }

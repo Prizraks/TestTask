@@ -20,7 +20,7 @@ namespace TestTask.Infrastructure.Jobs.Configuration
         /// <returns>Changed services.</returns>
         public static IServiceCollection AddJobs(this IServiceCollection services)
         {
-            services.AddTransient<LoadMeteoritesJob>();
+            services.AddTransient<ActualizationMeteoritesJob>();
 
             return services;
         }
@@ -32,7 +32,10 @@ namespace TestTask.Infrastructure.Jobs.Configuration
         /// <param name="jobsCronOptions">Jobs cron options.</param>
         public static void ConfigureJobs(IScheduler scheduler, JobsCronOptions jobsCronOptions)
         {
-            scheduler.Schedule<LoadMeteoritesJob>().Cron(jobsCronOptions.LoadMeteoritesCron).Zoned(TimeZoneInfo.Local);
+            scheduler
+                .Schedule<ActualizationMeteoritesJob>()
+                .Cron(jobsCronOptions.ActualizationMeteoritesCron)
+                .Zoned(TimeZoneInfo.Local);
         }
     }
 }

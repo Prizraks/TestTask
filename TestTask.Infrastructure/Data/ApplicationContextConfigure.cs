@@ -6,6 +6,8 @@ namespace TestTask.Infrastructure.Data
 {
     using Microsoft.Extensions.DependencyInjection;
 
+    using TestTask.Application;
+
     /// <summary>
     /// Database context configure.
     /// </summary>
@@ -18,6 +20,7 @@ namespace TestTask.Infrastructure.Data
         public static void AddDatabase(this IServiceCollection services)
         {
             services.AddDbContext<IApplicationContext, ApplicationContext>();
+            services.AddScoped<ITransaction, Transaction>();
         }
     }
 }

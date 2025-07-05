@@ -10,11 +10,6 @@ namespace TestTask.Domain.Meteorite
     public enum NameType
     {
         /// <summary>
-        /// Unknown.
-        /// </summary>
-        Unknown = 0,
-
-        /// <summary>
         /// Valid.
         /// </summary>
         Valid = 1,

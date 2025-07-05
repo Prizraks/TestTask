@@ -20,6 +20,22 @@ namespace TestTask.Infrastructure.Data.Configurations
             _ = builder ?? throw new ArgumentNullException(nameof(builder));
 
             builder.HasKey(x => x.Id);
+
+            builder
+                .HasIndex(x => x.ExternalId)
+                .IsUnique();
+
+            builder
+                .HasIndex(x => x.Name)
+                .IsUnique();
+
+            builder.Property(x => x.NameType);
+            builder.Property(x => x.RecClass);
+            builder.Property(x => x.Mass);
+            builder.Property(x => x.Fall);
+            builder.Property(x => x.Year);
+            builder.Property(x => x.Latitude);
+            builder.Property(x => x.Longitude);
         }
     }
 }
