@@ -8,6 +8,7 @@ using Serilog;
 
 using TestTask.Api;
 using TestTask.Application;
+using TestTask.Application.Web;
 using TestTask.Infrastructure;
 using TestTask.Infrastructure.Logging;
 
@@ -25,8 +26,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScheduler();
 
-builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddWebAppServices();
 
 await LoggerConfigure.LogWebHostAsync(async () =>
 {

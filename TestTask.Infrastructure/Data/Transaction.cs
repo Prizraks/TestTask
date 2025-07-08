@@ -16,23 +16,17 @@ namespace TestTask.Infrastructure.Data
     /// <summary>
     /// Transaction.
     /// </summary>
-    internal class Transaction : ITransaction
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="Transaction"/> class.
+    /// </remarks>
+    /// <param name="applicationContext">Application context.</param>
+    /// <param name="logger">Logger.</param>
+    internal class Transaction(
+        ApplicationContext applicationContext,
+        ILogger<Transaction> logger) : ITransaction
     {
-        private readonly ApplicationContext applicationContext;
-        private readonly ILogger<Transaction> logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Transaction"/> class.
-        /// </summary>
-        /// <param name="applicationContext">Application context.</param>
-        /// <param name="logger">Logger.</param>
-        public Transaction(
-            ApplicationContext applicationContext,
-            ILogger<Transaction> logger)
-        {
-            this.applicationContext = applicationContext;
-            this.logger = logger;
-        }
+        private readonly ApplicationContext applicationContext = applicationContext;
+        private readonly ILogger<Transaction> logger = logger;
 
         /// <inheritdoc/>
         public async Task<T> ExecuteAsync<T>(Func<Task<T>> operation, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)

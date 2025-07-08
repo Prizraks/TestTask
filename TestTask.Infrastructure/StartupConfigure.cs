@@ -7,6 +7,7 @@ namespace TestTask.Infrastructure
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using TestTask.Infrastructure.Caching;
     using TestTask.Infrastructure.Data;
     using TestTask.Infrastructure.Data.Repositories;
     using TestTask.Infrastructure.Integrations;
@@ -18,15 +19,16 @@ namespace TestTask.Infrastructure
     public static class StartupConfigure
     {
         /// <summary>
-        /// Add infrastructure services.
+        /// Add infrastructure.
         /// </summary>
         /// <param name="services">Service collection.</param>
         /// <param name="configuration">Configuration.</param>
-        public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDatabase();
             services.AddRepositories();
             services.AddJobs();
+            services.AddCaching();
             services.AddIntegrationService(configuration);
         }
     }

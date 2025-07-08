@@ -19,10 +19,35 @@ namespace TestTask.Domain.Meteorite
         /// <summary>
         /// Initializes a new instance of the <see cref="Meteorite"/> class.
         /// </summary>
-        /// <param name="ExternalId">External id.</param>
-        private Meteorite(int externalId)
+        /// <param name="externalId">External id.</param>
+        /// <param name="name">Name.</param>
+        /// <param name="nameType">Name type.</param>
+        /// <param name="recClass">Class.</param>
+        /// <param name="mass">Mass.</param>
+        /// <param name="fall">Fall.</param>
+        /// <param name="year">Year.</param>
+        /// <param name="latitude">Latitude.</param>
+        /// <param name="longitude">Longitude.</param>
+        private Meteorite(
+            int externalId,
+            string name,
+            NameType nameType,
+            string recClass,
+            double mass,
+            bool fall,
+            int year,
+            double latitude,
+            double longitude)
         {
             this.ExternalId = externalId;
+            this.Name = name;
+            this.NameType = nameType;
+            this.RecClass = recClass;
+            this.Mass = mass;
+            this.Fall = fall;
+            this.Year = year;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
         }
 
         /// <summary>
@@ -33,7 +58,7 @@ namespace TestTask.Domain.Meteorite
         /// <summary>
         /// Gets name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
         /// <summary>
         /// Gets name type.
@@ -43,7 +68,7 @@ namespace TestTask.Domain.Meteorite
         /// <summary>
         /// Gets recClass.
         /// </summary>
-        public string RecClass { get; private set; }
+        public string RecClass { get; private set; } = string.Empty;
 
         /// <summary>
         /// Gets mass.
@@ -94,17 +119,16 @@ namespace TestTask.Domain.Meteorite
             double latitude,
             double longitude)
         {
-            return new Meteorite(externalId)
-            {
-                Name = name,
-                NameType = nameType,
-                RecClass = recClass,
-                Mass = mass,
-                Fall = fall,
-                Year = year,
-                Latitude = latitude,
-                Longitude = longitude,
-            };
+            return new Meteorite(
+                externalId: externalId,
+                name: name,
+                nameType: nameType,
+                recClass: recClass,
+                mass: mass,
+                fall: fall,
+                year: year,
+                latitude: latitude,
+                longitude: longitude);
         }
 
         /// <summary>

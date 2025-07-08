@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestTask.Application.Web\TestTask.Application.Web.csproj" />
     <ProjectReference Include="..\TestTask.Application\TestTask.Application.csproj" />
     <ProjectReference Include="..\TestTask.Infrastructure\TestTask.Infrastructure.csproj" />
   </ItemGroup>

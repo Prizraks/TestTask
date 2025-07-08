@@ -28,6 +28,7 @@ namespace TestTask.Infrastructure.Data.Repositories
         {
             services.AddScoped<BaseRepository>();
             services.AddScoped<IMeteoriteRepository, MeteoriteRepository>();
+            services.AddScoped<IMeteoriteReadOnlyRepository, MeteoriteReadOnlyRepository>();
         }
     }
 }
