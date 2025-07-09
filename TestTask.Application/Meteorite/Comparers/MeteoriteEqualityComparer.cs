@@ -27,12 +27,8 @@ namespace TestTask.Application.Meteorite.Comparers
             }
 
             return x.Name == y.Name
-                   && x.NameType == y.NameType
                    && x.RecClass == y.RecClass
                    && x.Mass.Equals(y.Mass)
-                   && x.Fall == y.Fall
-                   && x.Latitude.Equals(y.Latitude)
-                   && x.Longitude.Equals(y.Longitude)
                    && x.Year.Equals(y.Year);
         }
 
@@ -40,12 +36,8 @@ namespace TestTask.Application.Meteorite.Comparers
         public int GetHashCode(Meteorite obj)
         {
             return obj.Name.GetHashCode()
-                ^ obj.NameType.GetHashCode()
                 ^ obj.RecClass.GetHashCode()
                 ^ obj.Mass.GetHashCode()
-                ^ obj.Fall.GetHashCode()
-                ^ obj.Latitude.GetHashCode()
-                ^ obj.Longitude.GetHashCode()
                 ^ obj.Year.GetHashCode();
         }
     }

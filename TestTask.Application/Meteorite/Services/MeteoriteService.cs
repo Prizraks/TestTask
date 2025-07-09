@@ -56,23 +56,12 @@ namespace TestTask.Application.Meteorite.Services
             var loadedMeteorites = new List<Meteorite>();
             foreach (var meteoriteFromApi in meteoritesFromApi)
             {
-                if (!Enum.TryParse(meteoriteFromApi.NameType, out NameType nameType))
-                {
-                    string message = $"Incorrect format {nameof(meteoriteFromApi.NameType)}. Value from Api = {meteoriteFromApi.NameType}!";
-                    this.logger.LogError(message: message);
-                    return;
-                }
-
                 loadedMeteorites.Add(Meteorite.Create(
                     externalId: meteoriteFromApi.Id,
                     name: meteoriteFromApi.Name,
-                    nameType: nameType,
                     recClass: meteoriteFromApi.RecClass,
                     mass: meteoriteFromApi.Mass,
-                    fall: meteoriteFromApi.Fall == FallText,
-                    year: meteoriteFromApi.Year.Year,
-                    latitude: meteoriteFromApi.Reclat,
-                    longitude: meteoriteFromApi.Reclong));
+                    year: meteoriteFromApi.Year.Year));
             }
 
             var currentMateorites = await this.meteoriteRepository.GetAll(token);
@@ -98,13 +87,9 @@ namespace TestTask.Application.Meteorite.Services
                 {
                     meteorite.Change(
                         name: loadedMeteorite.Name,
-                        nameType: loadedMeteorite.NameType,
                         recClass: loadedMeteorite.RecClass,
                         mass: loadedMeteorite.Mass,
-                        fall: loadedMeteorite.Fall,
-                        year: loadedMeteorite.Year,
-                        latitude: loadedMeteorite.Latitude,
-                        longitude: loadedMeteorite.Longitude);
+                        year: loadedMeteorite.Year);
 
                     changedMeteorites.Add(meteorite);
                 }

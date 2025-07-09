@@ -22,11 +22,6 @@ namespace TestTask.Application.GitHub.Models
         public string Name { get; init; } = string.Empty;
 
         /// <summary>
-        /// Gets name type.
-        /// </summary>
-        public string NameType { get; init; } = string.Empty;
-
-        /// <summary>
         /// Gets recClass.
         /// </summary>
         public string RecClass { get; init; } = string.Empty;
@@ -37,23 +32,8 @@ namespace TestTask.Application.GitHub.Models
         public double Mass { get; init; }
 
         /// <summary>
-        /// Gets fall.
-        /// </summary>
-        public string Fall { get; init; } = string.Empty;
-
-        /// <summary>
         /// Gets year.
         /// </summary>
         public DateTime Year { get; init; }
-
-        /// <summary>
-        /// Gets reclat.
-        /// </summary>
-        public double Reclat { get; init; }
-
-        /// <summary>
-        /// Gets longitude.
-        /// </summary>
-        public double Reclong { get; init; }
     }
 }
