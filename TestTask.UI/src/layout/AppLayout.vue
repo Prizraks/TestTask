@@ -1,21 +1,23 @@
 <script lang="ts" src="./AppLayout.ts"></script>
-<style lang="css" src="./AppLayout.css" />
-
 <template>
   <div class="layout-wrapper">
     <header class="layout-header">
-        <PrimeMenubar 
-            :model="menuItems" 
-            class="desktop-menu" 
-        >
-            <template #start>
-                <img src="../assets//vue.svg" alt="Icon" class="icon" />
-            </template>
-        </PrimeMenubar>
+      <PrimeMenubar 
+        :model="menuItems" 
+        class="desktop-menu" 
+      >
+        <template #start>
+          <img
+            src="../assets//vue.svg"
+            alt="Icon"
+            class="icon"
+          >
+        </template>
+      </PrimeMenubar>
     </header>
 
     <main class="layout-content">
-        <RouterView />
+      <RouterView />
     </main>
     <footer class="layout-footer">
       <div class="footer-content">
@@ -26,3 +28,5 @@
     </footer>
   </div>
 </template>
+
+<style lang="css" src="./AppLayout.css" />

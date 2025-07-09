@@ -1,5 +1,5 @@
 export default class Api {
-    protected static getQueryString(request: Object): string {
+    protected static getQueryString(request: object): string {
         return Object.entries(request)
             .map(([key, value]) => this.isEmptyValue(value) 
                 ? `${encodeURIComponent(key)}=`

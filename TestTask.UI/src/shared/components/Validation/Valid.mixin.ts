@@ -26,7 +26,7 @@ export default defineComponent({
         return this.$record.hasKey(this.invalidFields, this.fieldName);
     },
 
-    getErrorText(): any {
+    getErrorText(): string | undefined {
         return this.$record.get(this.invalidFields, this.fieldName);
     },
 
