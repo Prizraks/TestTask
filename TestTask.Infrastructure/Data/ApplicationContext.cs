@@ -8,6 +8,7 @@ namespace TestTask.Infrastructure.Data
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
 
     using TestTask.Domain.Meteorite;
 
@@ -42,12 +43,14 @@ namespace TestTask.Infrastructure.Data
         /// <inheritdoc/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(connectionString: ConnStringConfigName);
+            optionsBuilder
+                .UseSqlite(connectionString: ConnStringConfigName);
 
 #if DEBUG
             optionsBuilder
                 .EnableDetailedErrors()
-                .EnableSensitiveDataLogging();
+                .EnableSensitiveDataLogging()
+                .LogTo(Console.WriteLine, LogLevel.Information);
 #endif
         }
 

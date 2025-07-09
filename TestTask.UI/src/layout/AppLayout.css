@@ -1,0 +1,54 @@
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--surface-ground);
+  transition: background-color 0.3s;
+}
+.layout-header {
+  background-color: var(--surface-card);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.desktop-menu {
+  border: none;
+  background: transparent;
+}
+
+.layout-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.layout-footer {
+  background-color: var(--surface-card);
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .layout-content {
+    padding: 1rem;
+  }
+}

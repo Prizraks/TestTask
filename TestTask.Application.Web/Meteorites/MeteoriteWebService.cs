@@ -66,5 +66,17 @@ namespace TestTask.Application.Web.Meteorites
                     },
                 cacheDuration: TimeSpan.FromMinutes(20));
         }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<string>> GetAllClasses(CancellationToken token)
+        {
+            return await this.meteoriteReadOnlyRepository.GetAllClasses(token);
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<int>> GetYears(CancellationToken token)
+        {
+            return await this.meteoriteReadOnlyRepository.GetYears(token);
+        }
     }
 }

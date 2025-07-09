@@ -21,5 +21,19 @@ namespace TestTask.Application.Meteorite
         /// <param name="token">Operation cancellation token.</param>
         /// <returns>Asynchronous task instance.</returns>
         Task<(IReadOnlyCollection<MeteoriteGroupByYearDto> Records, int TotalRecords)> LazyLoadAsync(MeteoriteParamsDto requestModel, CancellationToken token);
+
+        /// <summary>
+        /// Get all classes.
+        /// </summary>
+        /// <param name="token">Operation cancellation token.</param>
+        /// <returns>Asynchronous task instance, what return classes.</returns>
+        Task<IEnumerable<string>> GetAllClasses(CancellationToken token);
+
+        /// <summary>
+        /// Get years.
+        /// </summary>
+        /// <param name="token">Operation cancellation token.</param>
+        /// <returns>Asynchronous task instance, what return years.</returns>
+        Task<IEnumerable<int>> GetYears(CancellationToken token);
     }
 }

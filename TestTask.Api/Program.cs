@@ -15,11 +15,14 @@ using TestTask.Infrastructure.Logging;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen();
+builder.Services.AddCorsPoliticy();
 
 builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+builder.Services.Configure<RouteOptions>(o => o.LowercaseUrls = true);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -52,6 +55,8 @@ await LoggerConfigure.LogWebHostAsync(async () =>
     app.UseScheduler(app.Configuration);
 
     app.UseHttpsRedirection();
+
+    app.UseCors(TestTask.Api.StartupConfigure.CorsPoliticy);
 
     app.UseAuthorization();
 

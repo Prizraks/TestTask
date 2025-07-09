@@ -13,6 +13,9 @@ namespace TestTask.Infrastructure.Data.Repositories.Meteorite
     using TestTask.Application.Common;
     using TestTask.Application.Meteorite;
     using TestTask.Application.Meteorite.Models;
+    using TestTask.Infrastructure.Data.Repositories.Extensions;
+
+    using Z.EntityFramework.Plus;
 
     /// <summary>
     /// Meteorite repository for read only.
@@ -44,24 +47,47 @@ namespace TestTask.Infrastructure.Data.Repositories.Meteorite
 
                 .GroupBy(x => x.Year)
 
-                .Select(x => new MeteoriteGroupByYearDto { Year = x.Key, Count = x.Count(), Mass = x.Sum(s => s.Mass) });
+                .Select(x => new MeteoriteGroupByYearDto { Year = x.Key, Count = x.Count(), MassSum = x.Sum(s => s.Mass) });
 
             if (!string.IsNullOrWhiteSpace(requestModel.SortField) && requestModel.SortOrder.HasValue)
             {
                 query = requestModel.SortOrder == SortOrderType.OrderByAsk
-                    ? query.OrderBy(x => $"x.{requestModel.SortField}")
-                    : query.OrderByDescending(x => $"x.{requestModel.SortField}");
+                    ? query.OrderByField(requestModel.SortField)
+                    : query.OrderByField(requestModel.SortField, descending: true);
             }
 
-            var totalRecords = await query.CountAsync(token);
+            var totalRecordsFuture = query
+                .DeferredCount()
+                .FutureValue();
 
             var records = (await query
                 .Skip(requestModel.PageNumber)
                 .Take(requestModel.PageSize)
+                .Future()
                 .ToListAsync(token))
                 .AsReadOnly();
 
-            return (Records: records, TotalRecords: totalRecords);
+            return (Records: records, TotalRecords: totalRecordsFuture.Value);
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<string>> GetAllClasses(CancellationToken token)
+        {
+            return await this.context.Meteorites
+                .AsNoTracking()
+                .Select(x => x.RecClass)
+                .Distinct()
+                .ToListAsync(token);
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<int>> GetYears(CancellationToken token)
+        {
+            return await this.context.Meteorites
+                .AsNoTracking()
+                .Select(x => x.Year)
+                .Distinct()
+                .ToListAsync(token);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace TestTask.Application.Web.Meteorites.Models.Response
         {
             this.Year = dto.Year;
             this.Count = dto.Count;
-            this.Mass = dto.Mass;
+            this.MassSum = dto.MassSum;
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace TestTask.Application.Web.Meteorites.Models.Response
         public int Count { get; init; }
 
         /// <summary>
-        /// Gets mass.
+        /// Gets mass sum.
         /// </summary>
-        public double Mass { get; init; }
+        public double MassSum { get; init; }
     }
 }

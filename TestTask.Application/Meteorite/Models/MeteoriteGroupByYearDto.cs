@@ -10,9 +10,9 @@ namespace TestTask.Application.Meteorite.Models
     public class MeteoriteGroupByYearDto
     {
         /// <summary>
-        /// Gets mass.
+        /// Gets mass sum.
         /// </summary>
-        public double Mass { get; init; }
+        public double MassSum { get; init; }
 
         /// <summary>
         /// Gets count.

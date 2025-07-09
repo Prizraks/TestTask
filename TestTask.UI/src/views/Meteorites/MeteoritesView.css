@@ -1,0 +1,12 @@
+.filters-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5rem;
+    padding: 10px 0;
+}
+.filters-btn {
+    display: flex;
+    gap:5px;
+    align-self: flex-start;
+}

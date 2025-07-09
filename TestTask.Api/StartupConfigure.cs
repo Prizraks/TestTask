@@ -5,7 +5,6 @@
 namespace TestTask.Api
 {
     using Coravel;
-    using Coravel.Scheduling.Schedule.Interfaces;
 
     using TestTask.Api.Middlewares;
     using TestTask.Infrastructure.Jobs.Configuration;
@@ -15,6 +14,11 @@ namespace TestTask.Api
     /// </summary>
     internal static class StartupConfigure
     {
+        /// <summary>
+        /// Cors politicy name.
+        /// </summary>
+        public const string CorsPoliticy = "AllowVueDevServer";
+
         /// <summary>
         /// Register scheduler.
         /// </summary>
@@ -34,6 +38,24 @@ namespace TestTask.Api
         public static void UseRequestCancellationLogging(this IApplicationBuilder builder)
         {
             builder.UseMiddleware<RequestCancellationMiddleware>();
+        }
+
+        /// <summary>
+        /// Add CORS Politicy.
+        /// </summary>
+        /// <param name="services">Services.</param>
+        public static void AddCorsPoliticy(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    CorsPoliticy,
+                    policy => policy
+                        .WithOrigins("http://localhost:5173")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
     }
 }
