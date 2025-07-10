@@ -30,7 +30,7 @@ namespace TestTask.Application.Web.Meteorites
         /// <inheritdoc />
         public async Task<MeteoritesLoadResponseModel> LazyLoadAsync(MeteoritesLoadRequestModel requestModel, CancellationToken token)
         {
-            _ = requestModel ?? throw new ArgumentNullException(nameof(requestModel));
+            ArgumentNullException.ThrowIfNull(requestModel);
 
             requestModel.Validation();
             if (!requestModel.IsValid)
@@ -69,14 +69,10 @@ namespace TestTask.Application.Web.Meteorites
 
         /// <inheritdoc />
         public async Task<IEnumerable<string>> GetAllClasses(CancellationToken token)
-        {
-            return await this.meteoriteReadOnlyRepository.GetAllClasses(token);
-        }
+            => await this.meteoriteReadOnlyRepository.GetAllClasses(token);
 
         /// <inheritdoc />
         public async Task<IEnumerable<int>> GetYears(CancellationToken token)
-        {
-            return await this.meteoriteReadOnlyRepository.GetYears(token);
-        }
+            => await this.meteoriteReadOnlyRepository.GetYears(token);
     }
 }

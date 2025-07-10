@@ -39,8 +39,8 @@ namespace TestTask.Infrastructure.Data
         /// Creates a set that can be used to query and save entities.
         /// </summary>
         /// <typeparam name="TEntity">Type entity.</typeparam>
-        /// <returns>Set for the provided entity type</returns>
-        DbSet<TEntity> Set<TEntity> ()
+        /// <returns>Set for the provided entity type.</returns>
+        DbSet<TEntity> Set<TEntity>()
             where TEntity : class;
     }
 }

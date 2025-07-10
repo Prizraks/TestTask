@@ -17,7 +17,7 @@ namespace TestTask.Infrastructure.Data.Configurations
         /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<Meteorite> builder)
         {
-            _ = builder ?? throw new ArgumentNullException(nameof(builder));
+            ArgumentNullException.ThrowIfNull(builder);
 
             builder.HasKey(x => x.Id);
 

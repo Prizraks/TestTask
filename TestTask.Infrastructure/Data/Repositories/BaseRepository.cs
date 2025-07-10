@@ -13,18 +13,13 @@ namespace TestTask.Infrastructure.Data.Repositories
     /// Base repository.
     /// </summary>
     /// <typeparam name="TEntity">Entity type.</typeparam>
-    internal class BaseRepository
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="BaseRepository"/> class.
+    /// </remarks>
+    /// <param name="context">Context.</param>
+    internal class BaseRepository(IApplicationContext context)
     {
-        private readonly IApplicationContext applicationContext;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseRepository"/> class.
-        /// </summary>
-        /// <param name="context">Context.</param>
-        public BaseRepository(IApplicationContext context)
-        {
-            this.applicationContext = context;
-        }
+        private readonly IApplicationContext applicationContext = context;
 
         /// <summary>
         /// Create entity.
@@ -52,7 +47,7 @@ namespace TestTask.Infrastructure.Data.Repositories
         public async Task CreateRangeAndSaveAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken token)
             where TEntity : class
         {
-            if (!(entities ?? []).Any())
+            if (entities is null || !entities.Any())
             {
                 return;
             }
@@ -93,7 +88,7 @@ namespace TestTask.Infrastructure.Data.Repositories
         public async Task UpdateRangeAndSaveAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken token)
             where TEntity : class
         {
-            if (!(entities ?? []).Any())
+            if (entities is null || !entities.Any())
             {
                 return;
             }
@@ -118,7 +113,7 @@ namespace TestTask.Infrastructure.Data.Repositories
             where TEntity : class
         {
             var entity = await this.applicationContext.Set<TEntity>().FindAsync(id);
-            if (entity == null)
+            if (entity is null)
             {
                 return false;
             }
@@ -149,11 +144,12 @@ namespace TestTask.Infrastructure.Data.Repositories
         /// </summary>
         /// <typeparam name="TEntity">Entity type.</typeparam>
         /// <param name="entities">Entities.</param>
+        /// <param name="token">Operation cancellation token.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task DeleteRangeAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken token)
             where TEntity : class
         {
-            if (!(entities ?? []).Any())
+            if (entities is null || !entities.Any())
             {
                 return;
             }

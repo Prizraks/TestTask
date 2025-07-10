@@ -1,4 +1,4 @@
-﻿// <copyright file="SortType.cs" company="V.Muryn Company">
+﻿// <copyright file="SortOrderType.cs" company="V.Muryn Company">
 // Copyright (c) V.Muryn Company. All rights reserved.
 // </copyright>
 

@@ -8,7 +8,6 @@ namespace TestTask.Api.Controllers
 
     using Microsoft.AspNetCore.Mvc;
 
-    using TestTask.Application.Meteorite.Models;
     using TestTask.Application.Web.Meteorites;
     using TestTask.Application.Web.Meteorites.Models.Requests;
     using TestTask.Application.Web.Meteorites.Models.Response;
@@ -33,11 +32,9 @@ namespace TestTask.Api.Controllers
         /// <param name="token">Operation cancellation token.</param>
         /// <returns>Meteorites.</returns>
         [HttpGet("get-meteorites")]
-        [ProducesResponseType(typeof(MeteoritesLoadResponseModel), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(MeteoritesLoadResponseModel), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetMeteoritesAsync([FromQuery] MeteoritesLoadRequestModel requestModel, CancellationToken token)
-        {
-            return new JsonResult(await this.meteoriteWebService.LazyLoadAsync(requestModel, token));
-        }
+            => new JsonResult(await this.meteoriteWebService.LazyLoadAsync(requestModel, token));
 
         /// <summary>
         /// Get all classes.
@@ -47,9 +44,7 @@ namespace TestTask.Api.Controllers
         [HttpGet("get-all-classes")]
         [ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetAllClasses(CancellationToken token)
-        {
-            return new JsonResult(await this.meteoriteWebService.GetAllClasses(token));
-        }
+            => new JsonResult(await this.meteoriteWebService.GetAllClasses(token));
 
         /// <summary>
         /// Get years.
@@ -59,8 +54,6 @@ namespace TestTask.Api.Controllers
         [HttpGet("get-years")]
         [ProducesResponseType(typeof(IEnumerable<int>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetMinAndMaxYears(CancellationToken token)
-        {
-            return new JsonResult(await this.meteoriteWebService.GetYears(token));
-        }
+            => new JsonResult(await this.meteoriteWebService.GetYears(token));
     }
 }

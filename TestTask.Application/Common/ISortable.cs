@@ -9,7 +9,6 @@ namespace TestTask.Application.Common
     /// </summary>
     public interface ISortable
     {
-
         /// <summary>
         /// Gets field name to sort by.
         /// </summary>

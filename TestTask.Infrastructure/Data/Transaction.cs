@@ -29,24 +29,6 @@ namespace TestTask.Infrastructure.Data
         private readonly ILogger<Transaction> logger = logger;
 
         /// <inheritdoc/>
-        public async Task<T> ExecuteAsync<T>(Func<Task<T>> operation, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-        {
-            await using var transaction = await this.applicationContext.Database.BeginTransactionAsync(isolationLevel);
-            try
-            {
-                var result = await operation();
-                await transaction.CommitAsync();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "Transaction failed");
-                await transaction.RollbackAsync();
-                throw;
-            }
-        }
-
-        /// <inheritdoc/>
         public async Task ExecuteAsync(Func<Task> operation, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             await using var transaction = await this.applicationContext.Database.BeginTransactionAsync(isolationLevel);

@@ -10,8 +10,6 @@ namespace TestTask.Application.Meteorite.Services
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Microsoft.Extensions.Logging;
-
     using TestTask.Application.GitHub;
     using TestTask.Application.Meteorite.Comparers;
     using TestTask.Application.Meteorite.Services.Contracts;
@@ -22,12 +20,9 @@ namespace TestTask.Application.Meteorite.Services
     /// </summary>
     internal class MeteoriteService : IMeteoriteService
     {
-        private const string FallText = "Fell";
-
         private readonly IGitHubApi gitHubApi;
         private readonly IMeteoriteRepository meteoriteRepository;
         private readonly ITransaction transaction;
-        private readonly ILogger<MeteoriteService> logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MeteoriteService"/> class.
@@ -35,17 +30,14 @@ namespace TestTask.Application.Meteorite.Services
         /// <param name="gitHubApi">Git hub api.</param>
         /// <param name="meteoriteRepository">Meteorite repository.</param>
         /// <param name="transaction">Transaction.</param>
-        /// <param name="logger">Logger.</param>
         public MeteoriteService(
             IGitHubApi gitHubApi,
             IMeteoriteRepository meteoriteRepository,
-            ITransaction transaction,
-            ILogger<MeteoriteService> logger)
+            ITransaction transaction)
         {
             this.gitHubApi = gitHubApi;
             this.meteoriteRepository = meteoriteRepository;
             this.transaction = transaction;
-            this.logger = logger;
         }
 
         /// <inheritdoc />

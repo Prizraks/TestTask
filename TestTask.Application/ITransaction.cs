@@ -14,15 +14,6 @@ namespace TestTask.Application
     public interface ITransaction
     {
         /// <summary>
-        /// Run operation in transaction and return data <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">Return data type.</typeparam>
-        /// <param name="operation">Operation.</param>
-        /// <param name="isolationLevel">Isolation level.</param>
-        /// <returns>Asynchronous task instance, what return data.</returns>
-        Task<T> ExecuteAsync<T>(Func<Task<T>> operation, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
-
-        /// <summary>
         /// Run operation in transaction.
         /// </summary>
         /// <param name="operation">Operation.</param>
