@@ -27,6 +27,7 @@
       </div>
     </footer>
   </div>
+  <AppNotification />
 </template>
 
 <style lang="css" src="./AppLayout.css" />

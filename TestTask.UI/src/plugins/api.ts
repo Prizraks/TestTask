@@ -1,5 +1,7 @@
 import axios, { type AxiosInstance, type AxiosResponse, AxiosError } from 'axios';
 import { type App } from 'vue';
+import { useToastStore } from '../stores/toast/toast.store';
+import { ToastSeveretyLevel, type ToastModel } from '../stores/toast/toast.types';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -34,6 +36,15 @@ class Api {
         if (this.isAccessDenied(error)) {
           //window.location.href = '/login';
         }
+
+        const toastStore = useToastStore();
+        toastStore.addToast({
+          summary: "Ошибка",
+          detail: "Ошибка сервера. Обратитесь в техподдержку.",
+          severity: ToastSeveretyLevel.Error,
+          life: 5000,
+        } as ToastModel);
+
         return Promise.reject(error);
       }
     );

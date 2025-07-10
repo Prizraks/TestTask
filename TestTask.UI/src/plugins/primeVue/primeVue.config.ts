@@ -13,6 +13,8 @@ import InputText from "primevue/inputtext";
 import Message from "primevue/message";
 import Select  from "primevue/select";
 import IftaLabel from "primevue/iftalabel";
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
 export default {
     install(app: App) {
@@ -21,6 +23,7 @@ export default {
                 preset: Aura
             }
         });
+        app.use(ToastService);
 
         app.component("PrimeButton", Button);
         app.component("PrimeDataTable", DataTable);
@@ -31,5 +34,6 @@ export default {
         app.component("PrimeMessage", Message);
         app.component("PrimeIftaLabel", IftaLabel );
         app.component("PrimeSelect", Select );
+        app.component("PrimeToast", Toast );
     }
 }
